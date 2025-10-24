@@ -1,0 +1,759 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ملخص مقدمة الكتاب المقدس</title>
+    <!-- تحميل Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- إعداد خط Inter الافتراضي -->
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+      @import url('https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@300;400;500;600;700;800&display=swap');
+      @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&display=swap');
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: 'Cairo', 'Noto Kufi Arabic', 'Inter', sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        line-height: 1.7;
+      }
+
+      .container {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        border-radius: 20px;
+        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+      }
+
+      /* تحسين العنوان الرئيسي */
+      .main-title {
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        text-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        animation: fadeInUp 1s ease-out;
+      }
+
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* تحسين البطاقات */
+      .card {
+        background: linear-gradient(145deg, #ffffff, #f8fafc);
+        border: 1px solid rgba(102, 126, 234, 0.1);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(90deg, #667eea, #764ba2);
+        transform: scaleX(0);
+        transition: transform 0.3s ease;
+      }
+
+      .card:hover::before {
+        transform: scaleX(1);
+      }
+
+      .card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 20px 40px rgba(102, 126, 234, 0.15);
+        border-color: rgba(102, 126, 234, 0.3);
+      }
+
+      /* تحسين التبويبات */
+      .tab {
+        position: relative;
+        background: linear-gradient(145deg, #f8fafc, #e2e8f0);
+        border: 2px solid transparent;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        font-weight: 500;
+      }
+
+      .tab:hover {
+        background: linear-gradient(145deg, #e0f2fe, #bae6fd);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(102, 126, 234, 0.1);
+      }
+
+      .tab.active {
+        background: linear-gradient(145deg, #667eea, #764ba2);
+        color: white;
+        border-color: rgba(255, 255, 255, 0.3);
+        box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+        transform: translateY(-2px);
+      }
+
+      /* تحسين الأكورديون */
+      [data-toggle] {
+        background: linear-gradient(145deg, #ffffff, #f8fafc);
+        border: 2px solid rgba(102, 126, 234, 0.1);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+        overflow: hidden;
+      }
+
+      [data-toggle]::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(102, 126, 234, 0.1),
+          transparent
+        );
+        transition: left 0.5s ease;
+      }
+
+      [data-toggle]:hover::before {
+        left: 100%;
+      }
+
+      [data-toggle]:hover {
+        background: linear-gradient(145deg, #f0f9ff, #e0f2fe);
+        border-color: rgba(102, 126, 234, 0.3);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(102, 126, 234, 0.1);
+      }
+
+      [data-toggle].active {
+        background: linear-gradient(145deg, #667eea, #764ba2);
+        color: white;
+        border-color: rgba(255, 255, 255, 0.3);
+        box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+      }
+
+      /* تحسين المحتوى القابل للطي */
+      [data-content] {
+        display: none;
+        opacity: 0;
+        transform: translateY(-10px);
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      .active[data-content] {
+        display: block;
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* تحسين الأيقونات */
+      .icon {
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      [data-toggle].active .icon {
+        transform: rotate(45deg);
+        color: white;
+      }
+
+      /* تحسين الاقتباسات */
+      blockquote {
+        background: linear-gradient(145deg, #f8fafc, #e2e8f0);
+        border-left: 5px solid #667eea;
+        position: relative;
+      }
+
+      blockquote::before {
+        content: '"';
+        position: absolute;
+        top: -10px;
+        right: 20px;
+        font-size: 4rem;
+        color: #667eea;
+        opacity: 0.3;
+        font-family: serif;
+      }
+
+      /* تحسين القوائم */
+      ul li {
+        position: relative;
+        padding-right: 20px;
+      }
+
+      ul li::before {
+        content: '✨';
+        position: absolute;
+        right: 0;
+        top: 0;
+      }
+
+      /* تحسين الخاتمة */
+      footer {
+        background: linear-gradient(145deg, #f8fafc, #e2e8f0);
+        border-radius: 15px;
+        padding: 2rem;
+        margin-top: 2rem;
+        border: 1px solid rgba(102, 126, 234, 0.1);
+      }
+
+      /* تأثيرات إضافية */
+      .fade-in {
+        animation: fadeIn 0.6s ease-out;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      .slide-in-right {
+        animation: slideInRight 0.6s ease-out;
+      }
+
+      @keyframes slideInRight {
+        from {
+          opacity: 0;
+          transform: translateX(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      /* تحسين الاستجابة */
+      @media (max-width: 768px) {
+        .container {
+          margin: 1rem;
+          padding: 1rem;
+        }
+
+        .tab {
+          font-size: 0.9rem;
+          padding: 0.75rem 1rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container mx-auto p-4 md:p-8 max-w-4xl">
+      <!-- العنوان الرئيسي -->
+      <header class="text-center mb-8">
+        <h1 class="main-title text-3xl md:text-4xl font-bold">
+          مقدمة عامة عن الكتاب المقدس
+        </h1>
+      </header>
+
+      <!-- قصة فولتير -->
+      <div
+        class="card p-6 rounded-lg shadow-md mb-8 border-r-4 border-sky-600 fade-in"
+      >
+        <h2 class="text-2xl font-semibold text-sky-700 mb-3">الكتاب الفريد</h2>
+        <p class="text-gray-700 leading-relaxed">
+          قال الملحد الفرنسي الشهير فولتير (توفي عام ١٧٧٨ م) إنه بعد مائة سنة من
+          تاريخه سوف تُمحى المسيحية ويختفي معها الكتاب المقدس.
+        </p>
+        <p class="text-gray-700 leading-relaxed mt-3">
+          <strong>ولكن ماذا حدث؟</strong> لقد صار فولتير في ذمة التاريخ وبقيت
+          المسيحية. ولم تمض خمسون سنة على وفاته حتى استخدمت جمعية جنيف للكتاب
+          المقدس منزله ومطبعته ليصيرا أكبر مركز في العالم لنشر وتوزيع الكتاب
+          المقدس.
+        </p>
+        <p class="text-gray-700 leading-relaxed mt-3">
+          لم يلق كتاب آخر مثل ما لقيه الكتاب المقدس من اضطهاد وهجوم، لكنه بقى
+          كصخرة صامدة، زاد توزيعه، وزاد حب الناس له.
+        </p>
+      </div>
+
+      <!-- نظام التبويبات -->
+      <div>
+        <!-- أزرار التبويبات -->
+        <div
+          class="flex border-b border-gray-300 mb-6 space-x-2 space-x-reverse"
+        >
+          <button
+            class="tab active text-lg py-3 px-5 transition-colors duration-200 border-b-4 border-transparent hover:border-sky-500"
+            data-tab="tab1"
+          >
+            الأرقام القياسية
+          </button>
+          <button
+            class="tab text-lg py-3 px-5 transition-colors duration-200 border-b-4 border-transparent hover:border-sky-500"
+            data-tab="tab2"
+          >
+            ما هو؟
+          </button>
+          <button
+            class="tab text-lg py-3 px-5 transition-colors duration-200 border-b-4 border-transparent hover:border-sky-500"
+            data-tab="tab3"
+          >
+            رحلته عبر الزمن
+          </button>
+          <button
+            class="tab text-lg py-3 px-5 transition-colors duration-200 border-b-4 border-transparent hover:border-sky-500"
+            data-tab="tab4"
+          >
+            حقائق سريعة
+          </button>
+        </div>
+
+        <!-- محتوى التبويبات -->
+        <div id="tab-content" class="bg-white p-6 rounded-lg shadow-md">
+          <!-- التبويب الأول: الأرقام القياسية -->
+          <div id="tab1" class="tab-pane active">
+            <h2 class="text-2xl font-semibold text-sky-700 mb-6 text-center">
+              الكتاب صاحب الأرقام القياسية
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              <!-- بطاقة: أقدم كتاب -->
+              <div
+                class="card p-4 rounded-lg shadow hover:shadow-lg transition-shadow slide-in-right"
+              >
+                <h3 class="font-bold text-sky-800 text-lg">
+                  أقدم كتاب في العالم
+                </h3>
+                <p class="text-gray-700 mt-1">
+                  كتبت أسفاره الأولى بواسطة موسى النبي قبل ٣٥٠٠ سنة.
+                </p>
+              </div>
+              <!-- بطاقة: أطول فترة كتابة -->
+              <div
+                class="card p-4 rounded-lg shadow hover:shadow-lg transition-shadow slide-in-right"
+              >
+                <h3 class="font-bold text-sky-800 text-lg">أطول فترة كتابة</h3>
+                <p class="text-gray-700 mt-1">تمت كتابته على مدى ١٦٠٠ سنة.</p>
+              </div>
+              <!-- بطاقة: أكبر عدد مخطوطات -->
+              <div
+                class="card p-4 rounded-lg shadow hover:shadow-lg transition-shadow slide-in-right"
+              >
+                <h3 class="font-bold text-sky-800 text-lg">أكبر عدد مخطوطات</h3>
+                <p class="text-gray-700 mt-1">
+                  له ما يزيد على ٢٤ ألف مخطوطة قديمة.
+                </p>
+              </div>
+              <!-- بطاقة: أول كتاب تُرجم -->
+              <div
+                class="card p-4 rounded-lg shadow hover:shadow-lg transition-shadow slide-in-right"
+              >
+                <h3 class="font-bold text-sky-800 text-lg">أول كتاب تُرجم</h3>
+                <p class="text-gray-700 mt-1">
+                  من العبرية إلى اليونانية (أواخر القرن الثالث ق.م.).
+                </p>
+              </div>
+              <!-- بطاقة: أول كتاب طُبع -->
+              <div
+                class="card p-4 rounded-lg shadow hover:shadow-lg transition-shadow slide-in-right"
+              >
+                <h3 class="font-bold text-sky-800 text-lg">أول كتاب طُبع</h3>
+                <p class="text-gray-700 mt-1">
+                  بأسلوب الطباعة الحديثة على يد (جون جوتنبرج).
+                </p>
+              </div>
+              <!-- بطاقة: أكبر عدد ترجمات -->
+              <div
+                class="card p-4 rounded-lg shadow hover:shadow-lg transition-shadow slide-in-right"
+              >
+                <h3 class="font-bold text-sky-800 text-lg">أكبر عدد ترجمات</h3>
+                <p class="text-gray-700 mt-1">
+                  تُرجم إلى نحو أكثر من ألفين لغة ولهجة.
+                </p>
+              </div>
+              <!-- بطاقة: أعلى معدل توزيع -->
+              <div
+                class="card p-4 rounded-lg shadow hover:shadow-lg transition-shadow slide-in-right"
+              >
+                <h3 class="font-bold text-sky-800 text-lg">أعلى معدل توزيع</h3>
+                <p class="text-gray-700 mt-1">
+                  يُطبع ويُوزع منه أكثر من ١٥٠ مليون نسخة سنوياً.
+                </p>
+              </div>
+              <!-- بطاقة: أول كتاب للفضاء -->
+              <div
+                class="card p-4 rounded-lg shadow hover:shadow-lg transition-shadow slide-in-right"
+              >
+                <h3 class="font-bold text-sky-800 text-lg">أول كتاب للفضاء</h3>
+                <p class="text-gray-700 mt-1">
+                  كان أول كتاب سافر إلى الفضاء وقُرئت أولى آياته على سطح القمر.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- التبويب الثاني: ما هو؟ -->
+          <div id="tab2" class="tab-pane hidden">
+            <h2 class="text-2xl font-semibold text-sky-700 mb-4">
+              ما هو الكتاب المقدس؟
+            </h2>
+            <p class="text-lg text-gray-700 mb-4">
+              هو مجموعة الأسفار (الكتب) الموحى بها من الله.
+            </p>
+            <blockquote
+              class="bg-gray-100 p-4 rounded-lg border-r-4 border-gray-300 mb-6"
+            >
+              <p class="italic">
+                "كل الكتاب هو موحى به من الله، ونافع للتعليم والتوبيخ، للتقويم
+                والتأديب الذي في البر"
+              </p>
+              <cite class="block text-left text-gray-600 mt-2"
+                >(٢ تي ٣: ١٦)</cite
+              >
+            </blockquote>
+
+            <h3 class="text-xl font-semibold text-sky-600 mb-3">
+              من هم كتبة الكتاب المقدس؟
+            </h3>
+            <p class="text-gray-700 mb-4">
+              كتبه نحو <strong>٤٠ كاتباً</strong> على مدى زمني نحو
+              <strong>١٦٠٠ سنة</strong> (بدأ بموسى النبي ~١٥٠٠ ق.م. وانتهى
+              بيوحنا ~٩٥ م). هؤلاء الكُتّاب كانوا مسوقين من الروح القدس.
+            </p>
+
+            <h3 class="text-xl font-semibold text-sky-600 mb-3">
+              تنوع الكُتّاب ووحدتهم
+            </h3>
+            <p class="text-gray-700 mb-2">
+              اختلف هؤلاء الكتبة في صفاتهم وظروفهم:
+            </p>
+            <ul class="list-disc list-inside text-gray-700 mb-4 space-y-1">
+              <li>
+                منهم الفلاسفة (مثل موسى وبولس) والبسطاء (مثل عاموس وبطرس).
+              </li>
+              <li>
+                منهم الطبيب (لوقا) وقائد الجيش (يشوع) وساقي الملك (نحميا).
+              </li>
+              <li>
+                منهم من عاش في القصور (داود وسليمان) ومن كتب في البرية والسجن
+                والنفي.
+              </li>
+            </ul>
+            <p class="text-gray-700 font-semibold mb-4">
+              ورغم هذا التنوع، يتمتع الكتاب المقدس بوحدة عجيبة بلا تضارب، لأن
+              الكاتب الحقيقي هو الله.
+            </p>
+
+            <h3 class="text-xl font-semibold text-sky-600 mb-3">
+              لغة الكتاب المقدس
+            </h3>
+            <ul class="list-disc list-inside text-gray-700 space-y-1">
+              <li>
+                <strong>العهد القديم:</strong> أغلبه باللغة العبرية، وأجزاء
+                قليلة بالآرامية.
+              </li>
+              <li><strong>العهد الجديد:</strong> كُتب باللغة اليونانية.</li>
+            </ul>
+          </div>
+
+          <!-- التبويب الثالث: رحلته عبر الزمن (أكورديون) -->
+          <div id="tab3" class="tab-pane hidden">
+            <h2 class="text-2xl font-semibold text-sky-700 mb-6">
+              رحلة الكتاب المقدس عبر الزمن
+            </h2>
+            <div class="space-y-3">
+              <!-- عنصر الأكورديون 1 -->
+              <div>
+                <button
+                  data-toggle
+                  class="w-full text-right p-4 rounded-lg shadow font-semibold text-lg transition-colors flex justify-between items-center"
+                >
+                  <span>١. موسى النبي والتوراة</span>
+                  <span class="icon text-xl transform transition-transform"
+                    >+</span
+                  >
+                </button>
+                <div data-content class="p-4 bg-gray-50 rounded-b-lg">
+                  <p>
+                    كتب موسى النبي (التوراة) وأعطاها للكهنة فوضعوها بجوار تابوت
+                    العهد.
+                  </p>
+                </div>
+              </div>
+              <!-- عنصر الأكورديون 2 -->
+              <div>
+                <button
+                  data-toggle
+                  class="w-full text-right p-4 rounded-lg shadow font-semibold text-lg transition-colors flex justify-between items-center"
+                >
+                  <span>٢. أرض الموعد والملوك</span>
+                  <span class="icon text-xl transform transition-transform"
+                    >+</span
+                  >
+                </button>
+                <div data-content class="p-4 bg-gray-50 rounded-b-lg">
+                  <p>
+                    دخلت الأسفار أرض الموعد، وكان يُضاف إليها الأسفار الجديدة.
+                    وأُعطيت وصية للملك أن يكتب لنفسه نسخة.
+                  </p>
+                </div>
+              </div>
+              <!-- عنصر الأكورديون 3 -->
+              <div>
+                <button
+                  data-toggle
+                  class="w-full text-right p-4 rounded-lg shadow font-semibold text-lg transition-colors flex justify-between items-center"
+                >
+                  <span>٣. السبي والعودة</span>
+                  <span class="icon text-xl transform transition-transform"
+                    >+</span
+                  >
+                </button>
+                <div data-content class="p-4 bg-gray-50 rounded-b-lg">
+                  <p>
+                    سافرت الأسفار مع المسبيين. ثم عادت مع عزرا الكاتب الذي جمعها
+                    وفسرها ووضعها في هيكل أورشليم.
+                  </p>
+                </div>
+              </div>
+              <!-- عنصر الأكورديون 4 -->
+              <div>
+                <button
+                  data-toggle
+                  class="w-full text-right p-4 rounded-lg shadow font-semibold text-lg transition-colors flex justify-between items-center"
+                >
+                  <span>٤. الاضطهاد وزمن الرب يسوع</span>
+                  <span class="icon text-xl transform transition-transform"
+                    >+</span
+                  >
+                </button>
+                <div data-content class="p-4 bg-gray-50 rounded-b-lg">
+                  <p>
+                    اهتم يهوذا المكابي بجمع الأسفار. وفي زمن الرب يسوع كانت كتب
+                    العهد القديم معروفة ومقبولة، وأضاف إليها الرسل أسفار العهد
+                    الجديد.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- التبويب الرابع: حقائق سريعة (قابل للطي) -->
+          <div id="tab4" class="tab-pane hidden">
+            <h2 class="text-2xl font-semibold text-sky-700 mb-6">
+              حقائق سريعة (اضغط لتكتشف)
+            </h2>
+            <div class="space-y-3">
+              <!-- حقيقة 1 -->
+              <div>
+                <button
+                  data-toggle
+                  class="w-full text-right p-4 rounded-lg shadow font-semibold text-lg transition-colors flex justify-between items-center"
+                >
+                  <span>عدد الأسفار</span>
+                  <span class="icon text-xl transform transition-transform"
+                    >+</span
+                  >
+                </button>
+                <div data-content class="p-4 bg-gray-50 rounded-b-lg">
+                  <p>
+                    يحتوي على ٧٣ سفراً (٤٦ في العهد القديم، ٢٧ في العهد الجديد).
+                  </p>
+                </div>
+              </div>
+              <!-- حقيقة 2 -->
+              <div>
+                <button
+                  data-toggle
+                  class="w-full text-right p-4 rounded-lg shadow font-semibold text-lg transition-colors flex justify-between items-center"
+                >
+                  <span>أكثر من كتب</span>
+                  <span class="icon text-xl transform transition-transform"
+                    >+</span
+                  >
+                </button>
+                <div data-content class="p-4 bg-gray-50 rounded-b-lg">
+                  <p>
+                    <strong>في العهد القديم:</strong> موسى النبي (الأسفار الخمسة
+                    الأولى).<br /><strong>في العهد الجديد:</strong> بولس الرسول
+                    (١٤ رسالة).
+                  </p>
+                </div>
+              </div>
+              <!-- حقيقة 3 -->
+              <div>
+                <button
+                  data-toggle
+                  class="w-full text-right p-4 rounded-lg shadow font-semibold text-lg transition-colors flex justify-between items-center"
+                >
+                  <span>الأقدم والأحدث</span>
+                  <span class="icon text-xl transform transition-transform"
+                    >+</span
+                  >
+                </button>
+                <div data-content class="p-4 bg-gray-50 rounded-b-lg">
+                  <p>
+                    <strong>أقدم سفر:</strong> يُرجح سفر أيوب (أو أسفار
+                    التوراة).<br /><strong>أقدم سفر في العهد الجديد:</strong>
+                    يُرجح رسالة يعقوب (أو تسالونيكي الأولى).<br /><strong
+                      >آخر سفر:</strong
+                    >
+                    سفر الرؤيا (نحو ٩٥ م).
+                  </p>
+                </div>
+              </div>
+              <!-- حقيقة 4 -->
+              <div>
+                <button
+                  data-toggle
+                  class="w-full text-right p-4 rounded-lg shadow font-semibold text-lg transition-colors flex justify-between items-center"
+                >
+                  <span>الأطول والأقصر (أسفار)</span>
+                  <span class="icon text-xl transform transition-transform"
+                    >+</span
+                  >
+                </button>
+                <div data-content class="p-4 bg-gray-50 rounded-b-lg">
+                  <p>
+                    <strong>أطول سفر:</strong> المزامير (١٥١ مزمور).<br /><strong
+                      >أقصر سفر:</strong
+                    >
+                    رسالة يوحنا الثانية (إصحاح واحد، ١٣ آية).
+                  </p>
+                </div>
+              </div>
+              <!-- حقيقة 5 -->
+              <div>
+                <button
+                  data-toggle
+                  class="w-full text-right p-4 rounded-lg shadow font-semibold text-lg transition-colors flex justify-between items-center"
+                >
+                  <span>الأطول والأقصر (إصحاحات)</span>
+                  <span class="icon text-xl transform transition-transform"
+                    >+</span
+                  >
+                </button>
+                <div data-content class="p-4 bg-gray-50 rounded-b-lg">
+                  <p>
+                    <strong>أطول إصحاح:</strong> مزمور ١١٩ (١٧٦ آية).<br /><strong
+                      >أقصر إصحاح:</strong
+                    >
+                    مزمور ١١٧ (آيتين فقط).
+                  </p>
+                </div>
+              </div>
+              <!-- حقيقة 6 -->
+              <div>
+                <button
+                  data-toggle
+                  class="w-full text-right p-4 rounded-lg shadow font-semibold text-lg transition-colors flex justify-between items-center"
+                >
+                  <span>الأطول والأقصر (آيات)</span>
+                  <span class="icon text-xl transform transition-transform"
+                    >+</span
+                  >
+                </button>
+                <div data-content class="p-4 bg-gray-50 rounded-b-lg">
+                  <p>
+                    <strong>أطول آية:</strong> أستير ٨: ٩.<br /><strong
+                      >أقصر آية (ع. قديم):</strong
+                    >
+                    "لا تزن" (خر ٢٠: ١٤).<br /><strong
+                      >أقصر آية (ع. جديد):</strong
+                    >
+                    "بكى يسوع" (يو ١١: ٣٥).
+                  </p>
+                </div>
+              </div>
+              <!-- حقيقة 7 -->
+              <div>
+                <button
+                  data-toggle
+                  class="w-full text-right p-4 rounded-lg shadow font-semibold text-lg transition-colors flex justify-between items-center"
+                >
+                  <span>حقائق مميزة</span>
+                  <span class="icon text-xl transform transition-transform"
+                    >+</span
+                  >
+                </button>
+                <div data-content class="p-4 bg-gray-50 rounded-b-lg">
+                  <p>
+                    <strong>سفر لم يُذكر فيه اسم (الله):</strong> سفر أستير
+                    (بدون التتمة).<br /><strong>سفر يبدأ باسم (الله):</strong>
+                    رسالة العبرانيين.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- خاتمة -->
+      <footer class="mt-10 text-center">
+        <p class="text-gray-600">
+          "هكذا تكون كلمتي التي تخرج من فمي. لا ترجع إلى فارغة بل تعمل ما سررت
+          به وتنجح في ما أرسلتها له"
+        </p>
+        <p class="text-gray-500 text-sm mt-2">(أش ٥٥: ١١)</p>
+      </footer>
+    </div>
+
+    <script>
+      // --- قسم التبويبات (Tabs) ---
+      const tabs = document.querySelectorAll('.tab')
+      const tabPanes = document.querySelectorAll('.tab-pane')
+
+      tabs.forEach((tab) => {
+        tab.addEventListener('click', () => {
+          // إزالة 'active' من كل التبويبات والألواح
+          tabs.forEach((t) => t.classList.remove('active'))
+          tabPanes.forEach((p) => {
+            p.classList.add('hidden')
+            p.classList.remove('active')
+          })
+
+          // إضافة 'active' للتبويب المختار ولوحه
+          tab.classList.add('active')
+          const targetPane = document.getElementById(tab.dataset.tab)
+          targetPane.classList.remove('hidden')
+          targetPane.classList.add('active')
+        })
+      })
+
+      // --- قسم الأكورديون (Accordion / Toggle) ---
+      const toggles = document.querySelectorAll('[data-toggle]')
+
+      toggles.forEach((toggle) => {
+        toggle.addEventListener('click', () => {
+          const content = toggle.nextElementSibling
+          const icon = toggle.querySelector('.icon')
+
+          // تبديل الصنف 'active'
+          toggle.classList.toggle('active')
+          content.classList.toggle('active')
+
+          // تحديث الأيقونة +/-
+          if (content.classList.contains('active')) {
+            icon.textContent = '−'
+            icon.style.transform = 'rotate(45deg)'
+          } else {
+            icon.textContent = '+'
+            icon.style.transform = 'rotate(0deg)'
+          }
+        })
+      })
+    </script>
+  </body>
+</html>
